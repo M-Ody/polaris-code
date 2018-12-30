@@ -46,7 +46,6 @@ namespace PolarisCore
             {
                 var temp = Pool.Instance.Get(dynamicDecalKey);
                 temp.transform.rotation = Quaternion.LookRotation(-hit.normal);
-                //temp.transform.position = FindInboundsPlacingPos(hit.point, hit.collider.bounds, decalSize, hit.normal) + (hit.normal * 0.0001f);
 				temp.transform.position = hit.point + hit.normal * 0.0001f;
                 temp.transform.SetParent(hit.transform);
                 temp.GetComponent<ParticleSystem>().Play();
@@ -55,7 +54,6 @@ namespace PolarisCore
             {
                 var temp = Pool.Instance.Get(decalKey);
                 temp.transform.rotation = Quaternion.LookRotation(-hit.normal);
-                //temp.transform.position = FindInboundsPlacingPos();
 				temp.transform.position = hit.point + hit.normal * 0.0001f;
                 temp.GetComponent<ParticleSystem>().Play();
             }

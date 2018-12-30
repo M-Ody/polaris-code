@@ -29,10 +29,6 @@ namespace PolarisCore
         {
             _laser = Pool.Instance.Get(lineKey).GetComponent<Laser>();
             _laser.Activate(initialRayPos,finalRayPos,fadeRate);
-            //Alterar o "line.enabled" para algo que possa ser chamada de todos objetos de pool (reset por exemplo)
-            /*line.enabled = true;
-            _line.SetPosition(0, initialRayPos);
-            _line.SetPosition(1, finalRayPos);*/
         }
     }
 }

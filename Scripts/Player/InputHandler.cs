@@ -38,9 +38,8 @@ namespace PolarisCore
 
         void Awake()
         {
-            // TODO: if (InputMode.KEYBOARD)
             SetUpForKeyboard();
-			//Debug.Log(Saver.Instance.GetPrefs().mouseSensitivity);
+            
 			SetMouseSensibility(Saver.Instance.GetPrefs().mouseSensitivity);
         }
 
@@ -86,7 +85,6 @@ namespace PolarisCore
 			if (_controlLocked)
 				return axisInput;
 				
-            // TODO: if (InputMode.KEYBOARD
             axisInput.x = Input.GetAxis("Mouse X") * _mouseSensibility;
             axisInput.y = Input.GetAxis("Mouse Y") * _mouseSensibility;
             return axisInput;
@@ -120,9 +118,6 @@ namespace PolarisCore
 			_firstGun[0] = KeyCode.Alpha1; _firstGun[1] = KeyCode.Alpha0;
 			_secondGun[0] = KeyCode.Alpha2; _secondGun[1] = KeyCode.Alpha9;
 			_thirdGun[0] = KeyCode.Alpha3; _thirdGun[1] = KeyCode.Alpha8;
-
-			//Debug.Log(Saver.Instance.GetPrefs().invertMouseClick);
-
 
 			if (Saver.Instance.GetPrefs().invertMouseClick)
 				_fireInput [0] = KeyCode.Mouse1;

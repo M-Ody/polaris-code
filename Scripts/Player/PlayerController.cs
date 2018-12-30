@@ -315,12 +315,5 @@ namespace PolarisCore
                 }             
             }
         }
-
-        private void OnGUI()
-        {
-            //GUI.Label(new Rect(0, 0, 100,100), ""+ _health);
-            //GUI.Label(new Rect(0, 50, 100, 100), "" + _cc.velocity);
-            //GUI.Label(new Rect(0, 100, 100, 100), "" + _verticalVelocity);
-        }
     }
 }

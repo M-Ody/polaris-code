@@ -9,19 +9,18 @@ using UnityEngine;
 
 namespace PolarisCore
 {
-	public class BloodDecal : MonoBehaviour 
-	{
-		private int _bloodSpashKey;
+    public class BloodDecal : MonoBehaviour 
+    {
+        private int _bloodSpashKey;
 
         private ParticleSystem _particle;
-		private RaycastHit _hit;
-		private bool _firstEnabled = true;
+        private RaycastHit _hit;
+        private bool _firstEnabled = true;
 
-		private void Awake()
-		{
-            //Pode haver um array de keys com um tipo de splash para randomizar
+        private void Awake()
+        {
             _particle = GetComponent<ParticleSystem>();
-		}
+        }
 
         public void Reset()
         {
@@ -30,30 +29,30 @@ namespace PolarisCore
         }
 
         private void OnEnable()
-		{
-			if (!_firstEnabled)
-			{
-				if (_bloodSpashKey == 0)
-				{
-					_bloodSpashKey = Pool.Instance.GetSharedPoolKey("BloodSplash");
-				}
-				//Debug.DrawRay(transform.position, transform.forward - transform.up, Color.green, 1500f);
-				if (Physics.Raycast(transform.position, transform.forward - transform.up, out _hit, 2.5f, LayerMaskData.recieveBloodDecal))
-				{
-					PlaceDecal(_bloodSpashKey, _hit.point, _hit.normal);
-				}
-			}
-			else
-			{
-				_firstEnabled = false;
-			}
+        {
+            if (!_firstEnabled)
+            {
+                if (_bloodSpashKey == 0)
+                {
+                    _bloodSpashKey = Pool.Instance.GetSharedPoolKey("BloodSplash");
+                }
+                
+                if (Physics.Raycast(transform.position, transform.forward - transform.up, out _hit, 2.5f, LayerMaskData.recieveBloodDecal))
+                {
+                    PlaceDecal(_bloodSpashKey, _hit.point, _hit.normal);
+                }
+            }
+            else
+            {
+                _firstEnabled = false;
+            }
         }
 
-		private void PlaceDecal(int key, Vector3 position, Vector3 normal)
-		{
-			var obj = Pool.Instance.Get(_bloodSpashKey);
-			obj.transform.position = position;
-			obj.transform.rotation = Quaternion.LookRotation(-normal);
-		}
-	}
+        private void PlaceDecal(int key, Vector3 position, Vector3 normal)
+        {
+            var obj = Pool.Instance.Get(_bloodSpashKey);
+            obj.transform.position = position;
+            obj.transform.rotation = Quaternion.LookRotation(-normal);
+        }
+    }
 }

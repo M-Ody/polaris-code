@@ -9,13 +9,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using PolarisCore;
 
-/*
-NOTA:
-Outra opção de ataque é o inimigo não seguir o player, mas sim um 
-espaço atrás da posição do player. Desse jeito, as paradas toscas
-não são necessáiras, e o inimigo pode atacar enquanto se move
-*/
-
 namespace PAI
 {
 	public class PAIAttackRange : PAIState, IPAIAttack

@@ -186,7 +186,6 @@ namespace PAI
 
         private bool IsInFront(Transform other)
         {
-            //Retorna um vetor que aponta deste objeto para o outro
             Vector3 heading = Vector3.Normalize(transform.position - other.position);
 			return Vector3.Dot(new Vector3 (transform.forward.x, 0f, transform.forward.z), new Vector3 (heading.x, 0f, heading.z)) < 0;
         }

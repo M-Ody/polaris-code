@@ -11,7 +11,6 @@ namespace PAI
 {
     public class PAIState : MonoBehaviour
     {
-        //public virtual void Initialize(); Por causa da utilização de estados como componenetes, é possível usar Start() e Awake();
         public virtual void StateActivated() { }
         public virtual void StateDeactivated() { }
         public virtual void Execute() { }
