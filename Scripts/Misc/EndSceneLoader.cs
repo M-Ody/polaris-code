@@ -10,26 +10,26 @@ using PolarisCore;
 
 public class EndSceneLoader : MonoBehaviour
 {
-	public Animator fadeAnim;
+    public Animator fadeAnim;
 
-	private bool isLoading = false;
+    private bool isLoading = false;
 
-	void OnTriggerEnter (Collider other)
-	{
-		if (other.tag == "Player" && !isLoading)
-		{
-			isLoading = true;
-			fadeAnim.gameObject.SetActive(true);
-			fadeAnim.SetTrigger("FadeOut");
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.tag == "Player" && !isLoading)
+        {
+            isLoading = true;
+            fadeAnim.gameObject.SetActive(true);
+            fadeAnim.SetTrigger("FadeOut");
 
-			Invoke("LoadScene", 0.5f);
-		}
-	}
+            Invoke("LoadScene", 0.5f);
+        }
+    }
 
-	private void LoadScene()
-	{
-		Cursor.lockState = CursorLockMode.Confined;
-		Saver.Instance.DeleteProgress();
-		GameObject.FindWithTag("GameManager").GetComponent<GameManager>().LoadEnd("Menu");
-	}
+    private void LoadScene()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Saver.Instance.DeleteProgress();
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().LoadEnd("Menu");
+    }
 }

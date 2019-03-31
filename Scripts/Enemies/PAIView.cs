@@ -19,20 +19,20 @@ namespace PAI
 
         [SerializeField]
         private float _visionRange = 5f;
-		[SerializeField]
-		private float _backVisionRange = 2f;
+        [SerializeField]
+        private float _backVisionRange = 2f;
 
-		private PAIEnemy _master;
+        private PAIEnemy _master;
         private GameObject _visionObj;
         private bool _foundPlayer;
 
-		private int _foundPlayerKey;
-		private int _patrolSoundKey;
+        private int _foundPlayerKey;
+        private int _patrolSoundKey;
 
-		private float _nextPatrolSound;
-		private float _patrolSoundTimestamp;
+        private float _nextPatrolSound;
+        private float _patrolSoundTimestamp;
 
-		private Vector3 _headPosition;
+        private Vector3 _headPosition;
 
         public enum ViewSensorEnum
         {
@@ -58,39 +58,39 @@ namespace PAI
         void Awake()
         {
             SetupSensorObject(ViewSensorEnum.Vision, _visionRange, ref _visionObj);
-			_headPosition = transform.up * 1.8f;
+            _headPosition = transform.up * 1.8f;
         }
 
-		void Start()
-		{
-			_master = GetComponent<PAIEnemy>();
+        void Start()
+        {
+            _master = GetComponent<PAIEnemy>();
 
-			if (gameObject.name.Contains("Enemy1"))
-			{
-				_foundPlayerKey = Pool.Instance.GetSharedPoolKey("Alien1FoundPlayer");
-				_patrolSoundKey = Pool.Instance.GetSharedPoolKey("Alien1Patrol");
-			} 
-			else if (gameObject.name.Contains("Enemy2"))
-			{
-				_foundPlayerKey = Pool.Instance.GetSharedPoolKey("Alien2FoundPlayer");
-				_patrolSoundKey = Pool.Instance.GetSharedPoolKey("Alien2Patrol");
-			}
+            if (gameObject.name.Contains("Enemy1"))
+            {
+                _foundPlayerKey = Pool.Instance.GetSharedPoolKey("Alien1FoundPlayer");
+                _patrolSoundKey = Pool.Instance.GetSharedPoolKey("Alien1Patrol");
+            } 
+            else if (gameObject.name.Contains("Enemy2"))
+            {
+                _foundPlayerKey = Pool.Instance.GetSharedPoolKey("Alien2FoundPlayer");
+                _patrolSoundKey = Pool.Instance.GetSharedPoolKey("Alien2Patrol");
+            }
 
-			_patrolSoundTimestamp = Random.Range(15f, 30f);
-			_nextPatrolSound += _patrolSoundTimestamp;
-		}
+            _patrolSoundTimestamp = Random.Range(15f, 30f);
+            _nextPatrolSound += _patrolSoundTimestamp;
+        }
 
-		void Update()
-		{
-			if (!_foundPlayer)
-			{
-				if (!_master.IsDead() && Time.timeSinceLevelLoad > _nextPatrolSound)
-				{
-					SoundManager.Play(_patrolSoundKey, transform);
-					_nextPatrolSound += _patrolSoundTimestamp;
-				}
-			}
-		}
+        void Update()
+        {
+            if (!_foundPlayer)
+            {
+                if (!_master.IsDead() && Time.timeSinceLevelLoad > _nextPatrolSound)
+                {
+                    SoundManager.Play(_patrolSoundKey, transform);
+                    _nextPatrolSound += _patrolSoundTimestamp;
+                }
+            }
+        }
 
         public bool Execute()
         {
@@ -102,7 +102,7 @@ namespace PAI
             obj = new GameObject(sensorType.ToString());
             obj.transform.parent = transform;
             obj.transform.position = transform.position;
-			obj.layer = LayerMask.NameToLayer("EnemiesSensor");
+            obj.layer = LayerMask.NameToLayer("EnemiesSensor");
             SphereCollider col = obj.AddComponent<SphereCollider>();
             col.isTrigger = true;
             col.radius = triggerRadius;
@@ -155,27 +155,27 @@ namespace PAI
         {
             if (!_foundPlayer && other.tag == "Player")
             {
-				float distance = Vector3.Distance(other.transform.position, transform.position);
+                float distance = Vector3.Distance(other.transform.position, transform.position);
 
-				//checar se algo obstrui a visão
-				RaycastHit rayInfo;
-				Vector3 headPos = transform.position + _headPosition;
+                //checar se algo obstrui a visão
+                RaycastHit rayInfo;
+                Vector3 headPos = transform.position + _headPosition;
 
-				if (!Physics.Raycast(headPos, (other.transform.position + _headPosition) - headPos, out rayInfo, distance, LayerMaskData.enemySensor))
-				{
-					//pode ver
-					if (IsInFront(other.transform))
-					{
-						_foundPlayer = true;
-						SoundManager.Play(_foundPlayerKey, transform);
-					}
-					//se já pode ver de costas
-					else if (distance < _backVisionRange)
-					{
-						_foundPlayer = true;
-						SoundManager.Play(_foundPlayerKey, transform);
-					}
-				}
+                if (!Physics.Raycast(headPos, (other.transform.position + _headPosition) - headPos, out rayInfo, distance, LayerMaskData.enemySensor))
+                {
+                    //pode ver
+                    if (IsInFront(other.transform))
+                    {
+                        _foundPlayer = true;
+                        SoundManager.Play(_foundPlayerKey, transform);
+                    }
+                    //se já pode ver de costas
+                    else if (distance < _backVisionRange)
+                    {
+                        _foundPlayer = true;
+                        SoundManager.Play(_foundPlayerKey, transform);
+                    }
+                }
             }
         }
 
@@ -187,7 +187,7 @@ namespace PAI
         private bool IsInFront(Transform other)
         {
             Vector3 heading = Vector3.Normalize(transform.position - other.position);
-			return Vector3.Dot(new Vector3 (transform.forward.x, 0f, transform.forward.z), new Vector3 (heading.x, 0f, heading.z)) < 0;
+            return Vector3.Dot(new Vector3 (transform.forward.x, 0f, transform.forward.z), new Vector3 (heading.x, 0f, heading.z)) < 0;
         }
     }
 }

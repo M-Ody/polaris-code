@@ -12,51 +12,51 @@ using UnityEngine.UI;
 
 //https://georgeblackwell.itch.io/unity-ui-typewriter
 public class TextTyper : MonoBehaviour 
-{	
-	[SerializeField] private float typeSpeed;
-	[SerializeField] private float startDelay;
-	//[SerializeField] private float volumeVariation;
-	[SerializeField] private bool startOnAwake;
+{    
+    [SerializeField] private float typeSpeed;
+    [SerializeField] private float startDelay;
+    //[SerializeField] private float volumeVariation;
+    [SerializeField] private bool startOnAwake;
 
-	private int counter;
-	private string textToType;
-	private bool typing;
-	private Text textComp;
-	//private AudioSource audioComp;
+    private int counter;
+    private string textToType;
+    private bool typing;
+    private Text textComp;
+    //private AudioSource audioComp;
 
-	void Awake()
-{	
-		textComp = GetComponent<Text>();
-		//audioComp = GetComponent<AudioSource>();
+    void Awake()
+{    
+        textComp = GetComponent<Text>();
+        //audioComp = GetComponent<AudioSource>();
 
-		counter = 0;
-		textToType = textComp.text;
-		textComp.text = "";
+        counter = 0;
+        textToType = textComp.text;
+        textComp.text = "";
 
-		if(startOnAwake)
-		{
+        if(startOnAwake)
+        {
             StartTyping();
-		}
-	}
+        }
+    }
 
-	public void StartTyping()
-	{	
-		if(!typing)
-		{
-			InvokeRepeating("Type", startDelay, typeSpeed);
-		}
-		else
-		{
-			print(gameObject.name + " : Is already typing!");
-		}
-	}
+    public void StartTyping()
+    {    
+        if(!typing)
+        {
+            InvokeRepeating("Type", startDelay, typeSpeed);
+        }
+        else
+        {
+            print(gameObject.name + " : Is already typing!");
+        }
+    }
 
-	public void StopTyping()
-	{
+    public void StopTyping()
+    {
         counter = 0;
         typing = false;
-		CancelInvoke("Type");
-	}
+        CancelInvoke("Type");
+    }
 
     public void UpdateText(string newText)
     {   
@@ -66,26 +66,26 @@ public class TextTyper : MonoBehaviour
         StartTyping();
     }
 
-	private void Type()
-	{	
-		typing = true;
-		textComp.text = textComp.text + textToType[counter];
-		//audioComp.Play();
-		counter++;
+    private void Type()
+    {    
+        typing = true;
+        textComp.text = textComp.text + textToType[counter];
+        //audioComp.Play();
+        counter++;
 
-		RandomiseVolume();
+        RandomiseVolume();
 
-		if(counter == textToType.Length)
-		{	
-			typing = false;
-			CancelInvoke("Type");
-		}
-	}
+        if(counter == textToType.Length)
+        {    
+            typing = false;
+            CancelInvoke("Type");
+        }
+    }
 
-	private void RandomiseVolume()
-	{
-		//audioComp.volume = Random.Range(1 - volumeVariation, volumeVariation + 1);
-	}
+    private void RandomiseVolume()
+    {
+        //audioComp.volume = Random.Range(1 - volumeVariation, volumeVariation + 1);
+    }
 
     public bool IsTyping() { return typing; }
 }

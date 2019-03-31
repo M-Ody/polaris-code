@@ -10,33 +10,33 @@ using PolarisCore;
 
 public class SoundManager : MonoBehaviour 
 {
-	private static SoundManager instance;
+    private static SoundManager instance;
 
-	private void Awake()
-	{
-		instance = gameObject.GetComponent<SoundManager>();
-	}
+    private void Awake()
+    {
+        instance = gameObject.GetComponent<SoundManager>();
+    }
 
-	public static void Play(int key, Transform t)
-	{
-		instance.PPlay(key, t);
-	}
+    public static void Play(int key, Transform t)
+    {
+        instance.PPlay(key, t);
+    }
 
-	public static void Play2D(int key)
-	{
-		instance.PPlay2D(key);
-	}
+    public static void Play2D(int key)
+    {
+        instance.PPlay2D(key);
+    }
 
-	private void PPlay(int key, Transform t)
-	{
-		var sound = Pool.Instance.GetNotActivated(key);
-		sound.transform.position = t.position;
-		sound.GetComponent<PlayAudio>().Play();
-	}
+    private void PPlay(int key, Transform t)
+    {
+        var sound = Pool.Instance.GetNotActivated(key);
+        sound.transform.position = t.position;
+        sound.GetComponent<PlayAudio>().Play();
+    }
 
-	private void PPlay2D(int key)
-	{
-		var sound = Pool.Instance.GetNotActivated(key);
-		sound.GetComponent<PlayAudio>().Play();
-	}
+    private void PPlay2D(int key)
+    {
+        var sound = Pool.Instance.GetNotActivated(key);
+        sound.GetComponent<PlayAudio>().Play();
+    }
 }

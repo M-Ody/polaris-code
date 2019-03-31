@@ -9,13 +9,13 @@ using UnityEngine;
 
 public class PlayAttachedAudio : MonoBehaviour 
 {
-	private AudioSource source;
+    private AudioSource source;
 
-	public void OnEnable()
-	{
-		if (source == null)
-			source = GetComponent<AudioSource>();
-		source.pitch = Random.Range(0.8f,1.1f);
-		source.Play();
-	}
+    public void OnEnable()
+    {
+        if (source == null)
+            source = GetComponent<AudioSource>();
+        source.pitch = Random.Range(0.8f,1.1f);
+        source.Play();
+    }
 }

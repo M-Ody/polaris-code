@@ -11,14 +11,14 @@ using PolarisCore;
 
 namespace PAI
 {
-	public class PAIAttack : PAIState, IPAIAttack
+    public class PAIAttack : PAIState, IPAIAttack
     {
         public float speed = 5f;
         public float rotationSpeed = 4000f;
-		public int meleeDamage = 10;
+        public int meleeDamage = 10;
 
-		private readonly float DISTANCE_HIT = 2.5f;
-		private readonly float DISTANCE_FOLLOW = 3f; 
+        private readonly float DISTANCE_HIT = 2.5f;
+        private readonly float DISTANCE_FOLLOW = 3f; 
 
         private string _lastTagHitted = "";
 
@@ -35,10 +35,10 @@ namespace PAI
         private bool _isClose;
         private bool _canFollow = true;
         private bool _isAttacking = false;
-		private bool _spotted = false;
+        private bool _spotted = false;
 
-		private int _attack1Key;
-		private int _attackHitKey;
+        private int _attack1Key;
+        private int _attackHitKey;
 
         private void Start()
         {
@@ -51,13 +51,13 @@ namespace PAI
             _enemy = GetComponent<PAIEnemy>();
             _rb = GetComponent<Rigidbody>();
 
-			_attack1Key = Pool.Instance.GetSharedPoolKey("Alien1Attack");
-			_attackHitKey = Pool.Instance.GetSharedPoolKey("AlienHitAttack");
+            _attack1Key = Pool.Instance.GetSharedPoolKey("Alien1Attack");
+            _attackHitKey = Pool.Instance.GetSharedPoolKey("AlienHitAttack");
         }
 
         public override void Execute()
         {
-			_spotted = true;
+            _spotted = true;
 
             if (_canFollow)
             {
@@ -66,22 +66,22 @@ namespace PAI
             }
         }
 
-		public void OnAttack()
-		{
-			if (Vector3.Distance(transform.position, _player.transform.position) < 3f)
-			{
-				_playerScript.Hit(meleeDamage);
-				SoundManager.Play(_attackHitKey, transform);
-				SoundManager.Play(_attack1Key, transform);
+        public void OnAttack()
+        {
+            if (Vector3.Distance(transform.position, _player.transform.position) < 3f)
+            {
+                _playerScript.Hit(meleeDamage);
+                SoundManager.Play(_attackHitKey, transform);
+                SoundManager.Play(_attack1Key, transform);
             }
-		}
+        }
 
         private void Update()
         {
-			if (_spotted)
-			{
-				//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_player.transform.position - transform.position, transform.up), Time.deltaTime * rotationSpeed);
-			}
+            if (_spotted)
+            {
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_player.transform.position - transform.position, transform.up), Time.deltaTime * rotationSpeed);
+            }
 
             if (!_enemy.IsDead())
             {
@@ -110,8 +110,8 @@ namespace PAI
 
                     if (Vector3.Dot(transform.forward, _player.transform.position - transform.position) > 1f)
                     {
-						if (!_isAttacking)
-							HitPlayer();
+                        if (!_isAttacking)
+                            HitPlayer();
                     }
                     else
                     {
@@ -133,11 +133,11 @@ namespace PAI
                 _isClose = true;
             }
             else if (_isClose == true)
-			{
-				_agent.isStopped = false;
-				_isClose = false;
-				_canFollow = true;
-			}  
+            {
+                _agent.isStopped = false;
+                _isClose = false;
+                _canFollow = true;
+            }  
         }
 
         private void HitPlayer()

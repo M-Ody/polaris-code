@@ -28,7 +28,7 @@ namespace PolarisCore
         MEDIC_KIT_SMALL = 14,
         MEDIC_KIT_MEDIUM = 15,
         MEDIC_KIT_LARGE = 16,
-		SHOTGUN = 17,
-		ROCKET_LAUNCHER = 18
+        SHOTGUN = 17,
+        ROCKET_LAUNCHER = 18
     }
 }

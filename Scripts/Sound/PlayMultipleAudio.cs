@@ -9,24 +9,24 @@ using UnityEngine;
 
 public class PlayMultipleAudio : PlayAudio 
 {
-	private AudioSource[] _sources;
+    private AudioSource[] _sources;
 
-	private void Start()
-	{
-		_sources = GetComponents<AudioSource>();
-	}
+    private void Start()
+    {
+        _sources = GetComponents<AudioSource>();
+    }
 
-	public override void Play()
-	{
-		_source = _sources[Random.Range(0, _sources.Length)];
+    public override void Play()
+    {
+        _source = _sources[Random.Range(0, _sources.Length)];
 
-		if (randomizePitch)
-		{
-			randomPitch = Random.Range(0.85f, 1.15f);
-			_source.pitch = (randomPitch);
-			randomPitch = Random.Range(0.85f, 1.15f);
-			_source.volume = _source.volume + (randomPitch - 1f);
-		}
-		_source.Play();
-	}
+        if (randomizePitch)
+        {
+            randomPitch = Random.Range(0.85f, 1.15f);
+            _source.pitch = (randomPitch);
+            randomPitch = Random.Range(0.85f, 1.15f);
+            _source.volume = _source.volume + (randomPitch - 1f);
+        }
+        _source.Play();
+    }
 }

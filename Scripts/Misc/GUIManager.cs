@@ -10,27 +10,27 @@ using UnityEngine.UI;
 
 namespace PolarisCore
 {
-	public class GUIManager : MonoBehaviour 
-	{
+    public class GUIManager : MonoBehaviour 
+    {
 
         //Crosshair Control
         public Animation[] stripeList;
 
-		//DamageAnimation
-		public Animation damageAnim;
-		public Animation lifeAnim;
+        //DamageAnimation
+        public Animation damageAnim;
+        public Animation lifeAnim;
 
         public Text ammo;
-		public Text health;
+        public Text health;
 
-		private int lastHealth = 100;
+        private int lastHealth = 100;
 
-		public GameObject blue;
-		public GameObject orange;
-		public GameObject purple;
+        public GameObject blue;
+        public GameObject orange;
+        public GameObject purple;
 
         private GunManager _gun;
-		private int _maxHealthSize;
+        private int _maxHealthSize;
 
         private void Start()
         {
@@ -38,59 +38,59 @@ namespace PolarisCore
         }
 
         public void UpdateHealth(int health)
-		{
+        {
             if (lastHealth < health)
             {
                 this.health.gameObject.GetComponent<Animator>().SetTrigger("Increase");
                 CrossPlay();
-				lifeAnim.Play ();
+                lifeAnim.Play ();
             }
             else if (lastHealth > health)
-			{
-				this.health.gameObject.GetComponent<Animator>().SetTrigger("Decrease");
-				damageAnim.Play ();
-			} 
-				
+            {
+                this.health.gameObject.GetComponent<Animator>().SetTrigger("Decrease");
+                damageAnim.Play ();
+            } 
+                
 
-			this.health.gameObject.GetComponent<Animator>().SetInteger("Value", health);
-			this.health.text = health.ToString();
+            this.health.gameObject.GetComponent<Animator>().SetInteger("Value", health);
+            this.health.text = health.ToString();
 
-			lastHealth = health;
+            lastHealth = health;
 
 
-		}
+        }
 
-		public void IncreaseAmmo(EGunType ammoGun)
-		{
+        public void IncreaseAmmo(EGunType ammoGun)
+        {
             if (_gun.currentGun == ammoGun)
-			this.ammo.gameObject.GetComponent<Animator>().SetTrigger("Increase");
+            this.ammo.gameObject.GetComponent<Animator>().SetTrigger("Increase");
             CrossPlay();
         }
 
-		public void UpdateCard(ECards card)
-		{
-			switch (card)
-			{
-			case ECards.BLUE_CARD:
-				blue.SetActive(true);
-				blue.GetComponent<Animator>().SetTrigger("Increase");
-                CrossPlay();
-				break;
-			case ECards.ORANGE_CARD:
-				orange.SetActive(true);
-				orange.GetComponent<Animator>().SetTrigger("Increase");
+        public void UpdateCard(ECards card)
+        {
+            switch (card)
+            {
+            case ECards.BLUE_CARD:
+                blue.SetActive(true);
+                blue.GetComponent<Animator>().SetTrigger("Increase");
                 CrossPlay();
                 break;
-			case ECards.PURPLE_CARD:
-				purple.SetActive(true);
-				purple.GetComponent<Animator>().SetTrigger("Increase");
+            case ECards.ORANGE_CARD:
+                orange.SetActive(true);
+                orange.GetComponent<Animator>().SetTrigger("Increase");
                 CrossPlay();
                 break;
-			default:
-				break;
-			}
-		}
-			
+            case ECards.PURPLE_CARD:
+                purple.SetActive(true);
+                purple.GetComponent<Animator>().SetTrigger("Increase");
+                CrossPlay();
+                break;
+            default:
+                break;
+            }
+        }
+            
         private void CrossPlay()
         {
             foreach (Animation anim in stripeList)
@@ -98,5 +98,5 @@ namespace PolarisCore
                 anim.Play();
             }
         }
-	}
+    }
 }

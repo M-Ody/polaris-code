@@ -25,7 +25,7 @@ namespace PolarisCore
         public float sprintSpeed = 8f;
         public float jumpSpeed = 15f;
         public float _gravity = 1f;
-		public Animator fadeAnim;
+        public Animator fadeAnim;
 
         private InputHandler _ih;
         private PlayerRotation _pr;
@@ -43,21 +43,21 @@ namespace PolarisCore
         private Vector3 _movement;
         private float _gravityAccelerationY = 0f;
 
-		private bool alive = true;
+        private bool alive = true;
 
         private bool _isPaused = false;
 
-		private int _playerPainKey;
-		private int _playerJumpKey;
-		private int _playerDeathKey;
+        private int _playerPainKey;
+        private int _playerJumpKey;
+        private int _playerDeathKey;
 
-		void Awake()
-		{
-			var obj = Camera.main.transform.parent;
-			var prefs = Saver.Instance.GetPrefs();
-			obj.GetComponentInChildren<VolumetricLightRenderer>().enabled = prefs.postProcessing;
-			obj.GetComponentInChildren<PostProcessingBehaviour>().enabled = prefs.postProcessing;
-		}
+        void Awake()
+        {
+            var obj = Camera.main.transform.parent;
+            var prefs = Saver.Instance.GetPrefs();
+            obj.GetComponentInChildren<VolumetricLightRenderer>().enabled = prefs.postProcessing;
+            obj.GetComponentInChildren<PostProcessingBehaviour>().enabled = prefs.postProcessing;
+        }
 
         void Start()
         {
@@ -78,38 +78,38 @@ namespace PolarisCore
 
             Cursor.lockState = CursorLockMode.Locked;
 
-			if (SceneManager.GetActiveScene().name.Contains("Level"))
-			{
-				if (SceneManager.GetActiveScene().name.Contains("1"))
-				{
-					Saver.Instance.DeleteProgress();
-					var stats = Saver.Instance.GetStats();
-					Inventory.Instance._health = 100;
-					Inventory.Instance._pistolAmmo = 15;
-					Inventory.Instance._shotgunAmmo = 5;
-					Inventory.Instance._rocketLauncherAmmo = 1;
-					Inventory.Instance.RemoveItem(EItemType.SHOTGUN);
-					Inventory.Instance.RemoveItem(EItemType.ROCKET_LAUNCHER);
-					Inventory.Instance.RequestUpdateHUD();
-				}
-				else
-				{
-					var stats = Saver.Instance.GetStats();
-					if (stats.hasShotgun)
-						Inventory.Instance.AddItem(EItemType.SHOTGUN);
-					if (stats.hasRocketLauncher)
-						Inventory.Instance.AddItem(EItemType.ROCKET_LAUNCHER);
-					Inventory.Instance._health = stats.health;
-					Inventory.Instance._pistolAmmo = stats.pistolAmmo;
-					Inventory.Instance._shotgunAmmo = stats.shotgunAmmo;
-					Inventory.Instance._rocketLauncherAmmo = stats.rocketLauncherAmmo;
-					Inventory.Instance.RequestUpdateHUD();
-				}
-			}
+            if (SceneManager.GetActiveScene().name.Contains("Level"))
+            {
+                if (SceneManager.GetActiveScene().name.Contains("1"))
+                {
+                    Saver.Instance.DeleteProgress();
+                    var stats = Saver.Instance.GetStats();
+                    Inventory.Instance._health = 100;
+                    Inventory.Instance._pistolAmmo = 15;
+                    Inventory.Instance._shotgunAmmo = 5;
+                    Inventory.Instance._rocketLauncherAmmo = 1;
+                    Inventory.Instance.RemoveItem(EItemType.SHOTGUN);
+                    Inventory.Instance.RemoveItem(EItemType.ROCKET_LAUNCHER);
+                    Inventory.Instance.RequestUpdateHUD();
+                }
+                else
+                {
+                    var stats = Saver.Instance.GetStats();
+                    if (stats.hasShotgun)
+                        Inventory.Instance.AddItem(EItemType.SHOTGUN);
+                    if (stats.hasRocketLauncher)
+                        Inventory.Instance.AddItem(EItemType.ROCKET_LAUNCHER);
+                    Inventory.Instance._health = stats.health;
+                    Inventory.Instance._pistolAmmo = stats.pistolAmmo;
+                    Inventory.Instance._shotgunAmmo = stats.shotgunAmmo;
+                    Inventory.Instance._rocketLauncherAmmo = stats.rocketLauncherAmmo;
+                    Inventory.Instance.RequestUpdateHUD();
+                }
+            }
 
-			_playerPainKey = Pool.Instance.GetSharedPoolKey("PlayerPain");
-			_playerJumpKey = Pool.Instance.GetSharedPoolKey("PlayerJump");
-			_playerDeathKey = Pool.Instance.GetSharedPoolKey("PlayerDeath");
+            _playerPainKey = Pool.Instance.GetSharedPoolKey("PlayerPain");
+            _playerJumpKey = Pool.Instance.GetSharedPoolKey("PlayerJump");
+            _playerDeathKey = Pool.Instance.GetSharedPoolKey("PlayerDeath");
         }
 
         void Update()
@@ -135,7 +135,7 @@ namespace PolarisCore
             else
             {
                 CameraShaker.Instance.ShakeOnce(2f, 2f, 0.1f, 0.1f);
-				SoundManager.Play(_playerPainKey, transform);
+                SoundManager.Play(_playerPainKey, transform);
             }
         }
 
@@ -246,7 +246,7 @@ namespace PolarisCore
             {
                 _anim.SetTrigger("Jump");
                 _verticalVelocity.y = jumpSpeed;
-				SoundManager.Play(_playerJumpKey, transform);
+                SoundManager.Play(_playerJumpKey, transform);
             }
         }
 
@@ -268,34 +268,34 @@ namespace PolarisCore
 
         private void Die()
         {
-			if (alive)
-			{
-				_anim.SetTrigger("Die");
-				_cc.enabled = false;
-				_rb.isKinematic = false;
-				_col.enabled = true;
-				_ih.LockControl(true);
-				SoundManager.Play(_playerDeathKey, transform);
+            if (alive)
+            {
+                _anim.SetTrigger("Die");
+                _cc.enabled = false;
+                _rb.isKinematic = false;
+                _col.enabled = true;
+                _ih.LockControl(true);
+                SoundManager.Play(_playerDeathKey, transform);
 
-				Destroy(_inventory);
-				fadeAnim.gameObject.SetActive(true);
-				fadeAnim.SetTrigger("FadeOut");
-				Invoke("Restart", 0.5f);
-				alive = false;
-			}
+                Destroy(_inventory);
+                fadeAnim.gameObject.SetActive(true);
+                fadeAnim.SetTrigger("FadeOut");
+                Invoke("Restart", 0.5f);
+                alive = false;
+            }
         }
 
-		private void Restart()
-		{
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		}
+        private void Restart()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Collectable")
             {
                 bool shouldDelete = _inventory.AddItem(other.GetComponent<Collectable>().itemType);
-				other.gameObject.SetActive(!shouldDelete);
+                other.gameObject.SetActive(!shouldDelete);
             }
         }
 

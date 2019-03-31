@@ -28,25 +28,25 @@ public class ReferencesRoamingEnemies : MonoBehaviour
         points[0] = new Vector2(myCollider.bounds.min.x, myCollider.bounds.min.z);
         points[1] = new Vector2(myCollider.bounds.max.x, myCollider.bounds.max.z);
 
-		Invoke("SetEnemiesToRoam",1f);
+        Invoke("SetEnemiesToRoam",1f);
     }
 
-	private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-		if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
             if(other.gameObject.GetComponent<PAIEnemy>() != null)
                 roamingEnemies.Add(other.gameObject.GetComponent<PAIEnemy>());
         }
     }
 
-	private void SetEnemiesToRoam()
-	{
-		foreach(PAIEnemy enemy in roamingEnemies)
-		{
-			enemy.SetRoaming(points, isPrioritary);
-		}
+    private void SetEnemiesToRoam()
+    {
+        foreach(PAIEnemy enemy in roamingEnemies)
+        {
+            enemy.SetRoaming(points, isPrioritary);
+        }
 
-		gameObject.SetActive(false);
-	}
+        gameObject.SetActive(false);
+    }
 }

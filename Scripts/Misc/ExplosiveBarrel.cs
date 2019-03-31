@@ -10,19 +10,19 @@ using PolarisCore;
 
 public class ExplosiveBarrel : MonoBehaviour 
 {
-	private int _explosionKey;
-	private int _burnKey;
+    private int _explosionKey;
+    private int _burnKey;
 
     private bool _alreadyExploded;
 
-	private void Start()
-	{
-		_explosionKey = Pool.Instance.GetSharedPoolKey("Explosion");
-		_burnKey = Pool.Instance.GetSharedPoolKey("Burn");
-	}
+    private void Start()
+    {
+        _explosionKey = Pool.Instance.GetSharedPoolKey("Explosion");
+        _burnKey = Pool.Instance.GetSharedPoolKey("Burn");
+    }
 
-	public void Explode()
-	{
+    public void Explode()
+    {
         if (!_alreadyExploded)
         {
             _alreadyExploded = true;
@@ -38,5 +38,5 @@ public class ExplosiveBarrel : MonoBehaviour
 
             gameObject.SetActive(false);
         }
-	}
+    }
 }

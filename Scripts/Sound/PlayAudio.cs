@@ -9,32 +9,32 @@ using UnityEngine;
 
 public class PlayAudio : MonoBehaviour 
 {
-	[SerializeField]
+    [SerializeField]
     protected bool randomizePitch;
 
     protected float randomPitch;
 
-	protected AudioSource _source;
+    protected AudioSource _source;
 
-	private void Start()
-	{
-		_source = GetComponent<AudioSource>();
-	}
+    private void Start()
+    {
+        _source = GetComponent<AudioSource>();
+    }
 
     public virtual void Play()
     {
-		if (randomizePitch)
+        if (randomizePitch)
         {
             randomPitch = Random.Range(0.85f, 1.15f);
-			_source.pitch = (randomPitch);
-			randomPitch = Random.Range(0.85f, 1.15f);
-			_source.volume = _source.volume + (randomPitch - 1f);
-		}
-		_source.Play();
+            _source.pitch = (randomPitch);
+            randomPitch = Random.Range(0.85f, 1.15f);
+            _source.volume = _source.volume + (randomPitch - 1f);
+        }
+        _source.Play();
     }
 
-	public virtual void Stop()
-	{
-		_source.Stop();
-	}
+    public virtual void Stop()
+    {
+        _source.Stop();
+    }
 }

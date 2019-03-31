@@ -12,7 +12,7 @@ namespace PAI
 {
     public class PAIRoaming : PAIState
     {
-		private Rigidbody rb;
+        private Rigidbody rb;
 
         private PAIMovement movement;
         private PAIFrontSensor sensor;
@@ -28,7 +28,7 @@ namespace PAI
         {
             sensor = GetComponentInChildren<PAIFrontSensor>();
             movement = GetComponent<PAIMovement>();
-			rb = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
             target = transform.position;
         }
 
@@ -36,10 +36,10 @@ namespace PAI
         {
             if (canRoamArround)
             {
-				if (rb.velocity.magnitude < 0.1f)
-				{
-					RandomizeTarget();
-				}
+                if (rb.velocity.magnitude < 0.1f)
+                {
+                    RandomizeTarget();
+                }
                 /*if (Mathf.Approximately(transform.position.x, target.x) && Mathf.Approximately(transform.position.y, target.y))
                 {
                     RandomizeTarget();

@@ -10,18 +10,18 @@ using PAI;
 
 public class SpawnHorde : MonoBehaviour 
 {
-	void OnEnable () 
-	{
-		Invoke("ActivateChildEnemies", 0.1f);
-	}
+    void OnEnable () 
+    {
+        Invoke("ActivateChildEnemies", 0.1f);
+    }
 
-	void ActivateChildEnemies()
-	{
-		var enemies = GetComponentsInChildren<PAIEnemy>();
+    void ActivateChildEnemies()
+    {
+        var enemies = GetComponentsInChildren<PAIEnemy>();
 
-		for (int i = 0; i < enemies.Length; i++)
-		{
-			enemies[i].ActivateEnemyAttack();
-		}
-	}
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].ActivateEnemyAttack();
+        }
+    }
 }

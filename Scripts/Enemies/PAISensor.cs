@@ -9,44 +9,44 @@ using UnityEngine;
 
 namespace PAI
 {
-	public class PAISensor : MonoBehaviour {
+    public class PAISensor : MonoBehaviour {
 
-	    private PAIView view;
-	    private PAIView.ViewSensorEnum sensorType;
+        private PAIView view;
+        private PAIView.ViewSensorEnum sensorType;
 
-		private Collider otherCol;
+        private Collider otherCol;
 
-	    void Start()
-	    {
-	        view = transform.parent.gameObject.GetComponent<PAIView>();
-	    }
+        void Start()
+        {
+            view = transform.parent.gameObject.GetComponent<PAIView>();
+        }
 
-	    void OnTriggerEnter(Collider other)
-	    {   
-			otherCol = other;
-	        view.SensorActivated(sensorType, other);
-	    }
+        void OnTriggerEnter(Collider other)
+        {   
+            otherCol = other;
+            view.SensorActivated(sensorType, other);
+        }
 
-		void FixedUpdate()
-		{
-			if (otherCol != null)
-				view.SensorActive(sensorType, otherCol);
-		}
+        void FixedUpdate()
+        {
+            if (otherCol != null)
+                view.SensorActive(sensorType, otherCol);
+        }
 
-	    /*void OnTriggerStay(Collider other)
-	    {
-	        view.SensorActive(sensorType, other);
-	    }*/
+        /*void OnTriggerStay(Collider other)
+        {
+            view.SensorActive(sensorType, other);
+        }*/
 
-	    void OnTriggerExit(Collider other)
-	    {
-			otherCol = null;
-	        view.SensorDeactivated(sensorType, other);
-	    }
+        void OnTriggerExit(Collider other)
+        {
+            otherCol = null;
+            view.SensorDeactivated(sensorType, other);
+        }
 
-	    public void SetSensorType(PAIView.ViewSensorEnum sensorType)
-	    {
-	        this.sensorType = sensorType;
-	    }
-	}
+        public void SetSensorType(PAIView.ViewSensorEnum sensorType)
+        {
+            this.sensorType = sensorType;
+        }
+    }
 }

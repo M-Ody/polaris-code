@@ -17,7 +17,7 @@ namespace PolarisCore
         {
             get
             {
-				if (!_instance)
+                if (!_instance)
                     _instance = CreateInstance<Pool>();
                 return _instance;
             }
@@ -32,25 +32,25 @@ namespace PolarisCore
 
         private int _poolSize;
         private List<SimplePool> _pool;
-		private Dictionary<string,int> _sharedPoolKeys;
-		private float _decalsOffset = 0.0001f;
+        private Dictionary<string,int> _sharedPoolKeys;
+        private float _decalsOffset = 0.0001f;
 
         public Pool()
         {
             _pool = new List<SimplePool>();
-			_sharedPoolKeys = new Dictionary<string,int>();
+            _sharedPoolKeys = new Dictionary<string,int>();
         }
 
-		public void Setup()
-		{
-			_decalsOffset = 0.0001f;
-		}
+        public void Setup()
+        {
+            _decalsOffset = 0.0001f;
+        }
 
         /// <summary>
         /// Simplest pool type. Iterates through objects releasing them until the end and starts again.
         /// </summary>
         /// <returns>Returns the key to the pool</returns>
-		public int AddSimplePoolObject(GameObject obj, int amount, Transform parent = null, bool isActive = false)
+        public int AddSimplePoolObject(GameObject obj, int amount, Transform parent = null, bool isActive = false)
         {
             var simplePool = new SimplePool();
             simplePool.pool = new List<GameObject>();
@@ -58,7 +58,7 @@ namespace PolarisCore
 
             for (int i = 0; i < amount; i++)
             {
-				obj.SetActive(isActive);
+                obj.SetActive(isActive);
                 var temp = Instantiate(obj);
                 if (parent != null)
                 {
@@ -99,11 +99,11 @@ namespace PolarisCore
             return _poolSize++;
         }
 
-		public void AddSharedPool(string sharedPoolName,GameObject obj, int amount, bool isActive = false)
-		{
+        public void AddSharedPool(string sharedPoolName,GameObject obj, int amount, bool isActive = false)
+        {
             if (_sharedPoolKeys.ContainsKey(sharedPoolName)) Debug.Log(sharedPoolName);
-			_sharedPoolKeys.Add (sharedPoolName,AddSimplePoolObject (obj, amount, null, isActive));
-		}
+            _sharedPoolKeys.Add (sharedPoolName,AddSimplePoolObject (obj, amount, null, isActive));
+        }
 
         public void CleanSharedPool()
         {
@@ -116,9 +116,9 @@ namespace PolarisCore
         }
 
         public int GetSharedPoolKey(string sharedPoolName)
-		{
-			return _sharedPoolKeys [sharedPoolName];
-		}
+        {
+            return _sharedPoolKeys [sharedPoolName];
+        }
 
         public GameObject Get(int key)
         {
@@ -128,11 +128,11 @@ namespace PolarisCore
             return _pool[key].pool[_pool[key].next++];
         }
 
-		public GameObject GetNotActivated(int key)
-		{
-			if (_pool[key].next == _pool[key].size)
-				_pool[key].next = 0;
-			return _pool[key].pool[_pool[key].next++];
-		}
+        public GameObject GetNotActivated(int key)
+        {
+            if (_pool[key].next == _pool[key].size)
+                _pool[key].next = 0;
+            return _pool[key].pool[_pool[key].next++];
+        }
     }
 }

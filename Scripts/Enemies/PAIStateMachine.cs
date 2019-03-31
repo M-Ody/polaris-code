@@ -32,7 +32,7 @@ namespace PAI
             _view = GetComponent<PAIView>();
             _roaming = GetComponent<PAIRoaming>();
             _enemy = GetComponent<PAIEnemy>();
-			_attack = GetComponent<IPAIAttack>();
+            _attack = GetComponent<IPAIAttack>();
         }
 
         public void InitializeObjects()

@@ -11,7 +11,7 @@ namespace PolarisCore
 {
     public class InputHandler : MonoBehaviour
     {
-		private float _mouseSensibility;
+        private float _mouseSensibility;
 
         private bool[] _inputBuffer = new bool[(int)EInputNames.TOTAL_INPUTS];
 
@@ -40,7 +40,7 @@ namespace PolarisCore
         {
             SetUpForKeyboard();
             
-			SetMouseSensibility(Saver.Instance.GetPrefs().mouseSensitivity);
+            SetMouseSensibility(Saver.Instance.GetPrefs().mouseSensitivity);
         }
 
         void Update()
@@ -58,23 +58,23 @@ namespace PolarisCore
             GetAxisInput(EInputNames.CHANGE_GUN_UP, EInputNames.CHANGE_GUN_DOWN, "Mouse ScrollWheel");
         }
 
-		public void SetMouseSensibility(float sensiblity)
-		{
-			_mouseSensibility = 1f + (sensiblity * 9f);
-		}
+        public void SetMouseSensibility(float sensiblity)
+        {
+            _mouseSensibility = 1f + (sensiblity * 9f);
+        }
 
-		public void SetInvertMouse (bool invert)
-		{
-			if (invert)
-				_fireInput [0] = KeyCode.Mouse1;
-			else
-				_fireInput [0] = KeyCode.Mouse0;
-		}
+        public void SetInvertMouse (bool invert)
+        {
+            if (invert)
+                _fireInput [0] = KeyCode.Mouse1;
+            else
+                _fireInput [0] = KeyCode.Mouse0;
+        }
 
         public bool[] GetInputStream()
         {
-			if (_controlLocked) 
-				return new bool[(int)EInputNames.TOTAL_INPUTS];
+            if (_controlLocked) 
+                return new bool[(int)EInputNames.TOTAL_INPUTS];
             return _inputBuffer;
         }
 
@@ -82,18 +82,18 @@ namespace PolarisCore
         {
             var axisInput = new Vector2();
 
-			if (_controlLocked)
-				return axisInput;
-				
+            if (_controlLocked)
+                return axisInput;
+                
             axisInput.x = Input.GetAxis("Mouse X") * _mouseSensibility;
             axisInput.y = Input.GetAxis("Mouse Y") * _mouseSensibility;
             return axisInput;
         }
 
-		public void LockControl(bool flag)
-		{
-			_controlLocked = flag;
-		}
+        public void LockControl(bool flag)
+        {
+            _controlLocked = flag;
+        }
 
         private void GetAxisInput(EInputNames positive, EInputNames negative, string axisName)
         {
@@ -108,22 +108,22 @@ namespace PolarisCore
         private void SetUpForKeyboard()
         {
             _forwardInput[0] = KeyCode.W; _forwardInput[1] = KeyCode.UpArrow;
-			_backwardInput[0] = KeyCode.S; _backwardInput[1] = KeyCode.DownArrow;
-			_leftInput[0] = KeyCode.A; _leftInput[1] = KeyCode.LeftArrow;
-			_rightInput[0] = KeyCode.D; _rightInput[1] = KeyCode.RightArrow;
-			_jumpInput[0] = KeyCode.Space; _jumpInput[1] = KeyCode.None;
-			_aimInput[0] = KeyCode.None; _aimInput[1] = KeyCode.None;
+            _backwardInput[0] = KeyCode.S; _backwardInput[1] = KeyCode.DownArrow;
+            _leftInput[0] = KeyCode.A; _leftInput[1] = KeyCode.LeftArrow;
+            _rightInput[0] = KeyCode.D; _rightInput[1] = KeyCode.RightArrow;
+            _jumpInput[0] = KeyCode.Space; _jumpInput[1] = KeyCode.None;
+            _aimInput[0] = KeyCode.None; _aimInput[1] = KeyCode.None;
             _changeGunUp[0] = KeyCode.Mouse1; _changeGunUp[1] = KeyCode.None;
             _changeGunDown[0] = KeyCode.Mouse1; _changeGunDown[1] = KeyCode.None;
-			_firstGun[0] = KeyCode.Alpha1; _firstGun[1] = KeyCode.Alpha0;
-			_secondGun[0] = KeyCode.Alpha2; _secondGun[1] = KeyCode.Alpha9;
-			_thirdGun[0] = KeyCode.Alpha3; _thirdGun[1] = KeyCode.Alpha8;
+            _firstGun[0] = KeyCode.Alpha1; _firstGun[1] = KeyCode.Alpha0;
+            _secondGun[0] = KeyCode.Alpha2; _secondGun[1] = KeyCode.Alpha9;
+            _thirdGun[0] = KeyCode.Alpha3; _thirdGun[1] = KeyCode.Alpha8;
 
-			if (Saver.Instance.GetPrefs().invertMouseClick)
-				_fireInput [0] = KeyCode.Mouse1;
-			else
-				_fireInput [0] = KeyCode.Mouse0;
-			_fireInput[1] = KeyCode.LeftControl;
+            if (Saver.Instance.GetPrefs().invertMouseClick)
+                _fireInput [0] = KeyCode.Mouse1;
+            else
+                _fireInput [0] = KeyCode.Mouse0;
+            _fireInput[1] = KeyCode.LeftControl;
         }
 
         private void HandleInput(EInputNames action, KeyCode[] keyCodes)

@@ -1,9 +1,9 @@
 # Polaris
-This repository contains the source code of **Polaris**, a student project.
+This repository contains the source code of the **Polaris** game, which you can download for free [here](https://m-ody.itch.io/polaris).
 
-All code was writted by **M-Ody**.
+I worked as the solo programmer in this game, with a team working on level design, modelling and texturing.
 
-The game was build in **Unity 2017.2.0f3**, but it will not build as it is in this repository because the lack of assets. This is only for reference.
+The game was built in **Unity 2017.2.0f3**, but it will not build as it is in this repository because the lack of assets. This is only for reference.
 
-# Notice
-Do not use this as a source of well-written code. Part of the project was made through a though deadline. However, I believe that some people can enjoy having a look at how we had gone about bringing the game to life.
+# Notes
+Looking back, there's a lot of things which I would do differently today. However, I'm very proud of what this turned, despite the poor planning and lack of experience with such a big project.

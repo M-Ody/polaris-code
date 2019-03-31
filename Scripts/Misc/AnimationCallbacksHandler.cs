@@ -9,23 +9,23 @@ using UnityEngine;
 
 namespace PolarisCore
 {
-	public class AnimationCallbacksHandler : MonoBehaviour {
+    public class AnimationCallbacksHandler : MonoBehaviour {
 
-		private GunManager _gun;
+        private GunManager _gun;
 
-		private void Awake()
-		{
-			_gun = GetComponentInChildren<GunManager>();
-		}
+        private void Awake()
+        {
+            _gun = GetComponentInChildren<GunManager>();
+        }
 
-		public void OnGunDown()
-		{
-			_gun.OnGunDown();
-		}
+        public void OnGunDown()
+        {
+            _gun.OnGunDown();
+        }
 
-		public void OnGunUp()
-		{
-			_gun.OnGunUp();
-		}
-	}
+        public void OnGunUp()
+        {
+            _gun.OnGunUp();
+        }
+    }
 }

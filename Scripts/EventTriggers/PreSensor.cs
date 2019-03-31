@@ -11,17 +11,17 @@ namespace PolarisCore
 {
 public class PreSensor : MonoBehaviour {
 
-	private Door _door;
+    private Door _door;
 
-	void Start () 
-	{
-		_door = GetComponentInParent<Door>();
-	}
-	
-	void OnTriggerEnter (Collider other) 
-	{
-		if (((1 << other.gameObject.layer) & LayerMaskData.player) != 0)
-			_door.PreSensorActivated();
-	}
+    void Start () 
+    {
+        _door = GetComponentInParent<Door>();
+    }
+    
+    void OnTriggerEnter (Collider other) 
+    {
+        if (((1 << other.gameObject.layer) & LayerMaskData.player) != 0)
+            _door.PreSensorActivated();
+    }
 }
 }

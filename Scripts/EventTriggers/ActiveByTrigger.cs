@@ -24,15 +24,15 @@ namespace PolarisCore
         }
 
         void OnTriggerEnter(Collider other)
-		{
-			if (other.gameObject.tag == "Player") {
-				
-				foreach (GameObject target in targetObjects) {
-					target.SetActive (true);
-				}
-				gameObject.SetActive (false);
+        {
+            if (other.gameObject.tag == "Player") {
+                
+                foreach (GameObject target in targetObjects) {
+                    target.SetActive (true);
+                }
+                gameObject.SetActive (false);
 
-			}
-		}
+            }
+        }
     }
 }

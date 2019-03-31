@@ -5,5 +5,5 @@
 // mathiasluizody@hotmail.com
 public interface IPAIAttack 
 {
-	void Execute();
+    void Execute();
 }

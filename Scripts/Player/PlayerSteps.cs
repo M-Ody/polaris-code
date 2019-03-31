@@ -10,15 +10,15 @@ using PolarisCore;
 
 public class PlayerSteps : MonoBehaviour 
 {
-	private int _playStepsKey;
+    private int _playStepsKey;
 
-	private void Start()
-	{
-		_playStepsKey = Pool.Instance.GetSharedPoolKey("PlayerSteps");
-	}
+    private void Start()
+    {
+        _playStepsKey = Pool.Instance.GetSharedPoolKey("PlayerSteps");
+    }
 
-	public void _Play()
-	{
-		SoundManager.Play(_playStepsKey, transform);
-	}
+    public void _Play()
+    {
+        SoundManager.Play(_playStepsKey, transform);
+    }
 }
